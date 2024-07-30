@@ -1,0 +1,17 @@
+body{
+    background-color: dodgerblue;
+    display: flex ;
+    justify-content: center;
+}
+
+#playChessButton{
+
+    margin-top: 20%;
+    font-size: 30px;
+    height: 100px;
+    width: 200px;
+    background-color: black;
+    color: white;
+    border-radius: 100px;;
+
+}
