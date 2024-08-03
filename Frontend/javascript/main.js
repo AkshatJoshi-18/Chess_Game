@@ -1,15 +1,96 @@
-
-import {blackKing, blackQueen, blackRook1, blackRook2, blackBishop1, 
-    blackBishop2, blackKnight1, blackKnight2, blackPawn, whiteKing, 
-    whiteQueen, whiteRook1, whiteRook2, whiteBishop1, whiteBishop2, 
-    whiteKnight1, whiteKnight2, whitePawn } from './bindPieces.js';
-
-import {displayMovesKing, displayMovesBishop, displayMovesKnight
-    , displayMovesPawn, displayMovesQueen, displayMovesRook} from './displayPossibleMoves.js';
+// Black pieces
 
 
-// chessMatrix is a map that stores the position of each piece on the board
-let chessMatrix = new Map();
+const blackKing = document.createElement('img');
+blackKing.src = '../resources/pieces_image/black-king.png';
+blackKing.id = "blackKing"
+
+const blackQueen = document.createElement('img');
+blackQueen.src = '../resources/pieces_image/black-queen.png';
+blackQueen.id = "blackQueen"
+
+const blackRook1 = document.createElement('img');
+blackRook1.src = '../resources/pieces_image/black-rook.png';
+blackRook1.id = "blackRook1"
+
+const blackRook2 = document.createElement('img');
+blackRook2.src = '../resources/pieces_image/black-rook.png';
+blackRook2.id = "blackRook2"
+
+const blackBishop1 = document.createElement('img');
+blackBishop1.src = '../resources/pieces_image/black-bishop.png';
+blackBishop1.id = "blackBishop1"
+
+
+const blackBishop2 = document.createElement('img');
+blackBishop2.src = '../resources/pieces_image/black-bishop.png';
+blackBishop2.id = "blackBishop2"
+
+const blackKnight1 = document.createElement('img');
+blackKnight1.src = '../resources/pieces_image/black-knight.png';
+blackKnight1.id = "blackKnight1"
+
+const blackKnight2 = document.createElement('img');
+blackKnight2.src = '../resources/pieces_image/black-knight.png';
+blackKnight2.id = "blackKnight2"
+
+const blackPawn = new Array(8);
+for(let i = 0 ; i < 8 ; i++) {
+    blackPawn[i] = document.createElement('img');
+    blackPawn[i].src = '../resources/pieces_image/black-pawn.png';
+    blackPawn[i].id = `blackPawn${i}`
+}
+
+
+// White pieces
+
+const whiteKing = document.createElement('img');
+whiteKing.src = '../resources/pieces_image/white-king.png';
+whiteKing.id = "whiteKing"
+
+const whiteQueen = document.createElement('img');
+whiteQueen.src = '../resources/pieces_image/white-queen.png';
+whiteQueen.id = "whiteQueen"
+
+const whiteRook1 = document.createElement('img');
+whiteRook1.src = '../resources/pieces_image/white-rook.png';
+whiteRook1.id = "whiteRook1"
+
+const whiteRook2 = document.createElement('img');
+whiteRook2.src = '../resources/pieces_image/white-rook.png';
+whiteRook2.id = "whiteRook2"
+
+const whiteBishop1 = document.createElement('img');
+whiteBishop1.src = '../resources/pieces_image/white-bishop.png';
+whiteBishop1.id = "whiteBishop1"
+
+const whiteBishop2 = document.createElement('img');
+whiteBishop2.src = '../resources/pieces_image/white-bishop.png';
+whiteBishop2.id = "whiteBishop2"
+
+const whiteKnight1 = document.createElement('img');
+whiteKnight1.src = '../resources/pieces_image/white-knight.png';
+whiteKnight1.id = "whiteKnight1"
+
+const whiteKnight2 = document.createElement('img');
+whiteKnight2.src = '../resources/pieces_image/white-knight.png';
+whiteKnight2.id = "whiteKnight2"
+
+const whitePawn = new Array(8);
+for(let i = 0 ; i < 8 ; i++) {
+    whitePawn[i] = document.createElement('img');
+    whitePawn[i].src = '../resources/pieces_image/white-pawn.png';
+    whitePawn[i].id = `whitePawn${i}`
+}
+
+
+// export { blackKing, blackQueen, blackRook1, blackRook2, blackBishop1, 
+//     blackBishop2, blackKnight1, blackKnight2, blackPawn, whiteKing, 
+//     whiteQueen, whiteRook1, whiteRook2, whiteBishop1, whiteBishop2, 
+//     whiteKnight1, whiteKnight2, whitePawn ,};
+
+
+let chessMatrix = new Map(); // chesess matrix is my initial looking of the board
 
 for(let i = 0 ; i < 8 ; i ++)
 {
@@ -19,135 +100,103 @@ for(let i = 0 ; i < 8 ; i ++)
     }
 }
 
-//initialPiecesPosition() function sets the initial position of all the pieces on the board
-function initialPiecesPosition() {
-
-    for(let i = 0 ; i < 8 ; i++) {
-        chessMatrix.set(`row-6_column-${i}`, blackPawn[i]);
-    }
-
-    chessMatrix.set('row-7_column-0', blackRook1);
-    chessMatrix.set('row-7_column-1', blackKnight1);
-    chessMatrix.set('row-7_column-2', blackBishop1);
-    chessMatrix.set('row-7_column-3', blackQueen);
-    chessMatrix.set('row-7_column-4', blackKing);
-    chessMatrix.set('row-7_column-5', blackBishop2);
-    chessMatrix.set('row-7_column-6', blackKnight2);
-    chessMatrix.set('row-7_column-7', blackRook2);
-
-
-    for(let i = 0 ; i < 8 ; i++) {
-        chessMatrix.set(`row-1_column-${i}`, whitePawn[i]);
-    }
-
-    chessMatrix.set('row-0_column-0', whiteRook1);
-    chessMatrix.set('row-0_column-1', whiteKnight1);
-    chessMatrix.set('row-0_column-2', whiteBishop1);
-    chessMatrix.set('row-0_column-3', whiteQueen);
-    chessMatrix.set('row-0_column-4', whiteKing);
-    chessMatrix.set('row-0_column-5', whiteBishop2);
-    chessMatrix.set('row-0_column-6', whiteKnight2);
-    chessMatrix.set('row-0_column-7', whiteRook2);
-}initialPiecesPosition() 
-
-
-
-//add event listener to all the pieces
-blackKing.addEventListener('click', function() {displayMoves(blackKing)})
-blackQueen.addEventListener('click', function() {displayMoves(blackQueen)})
-blackRook1.addEventListener('click', function() {displayMoves(blackRook1)})
-blackRook2.addEventListener('click', function() {displayMoves(blackRook2)})
-blackBishop1.addEventListener('click', function() {displayMoves(blackBishop1)})
-blackBishop2.addEventListener('click', function() {displayMoves(blackBishop2)})
-blackKnight1.addEventListener('click', function() {displayMoves(blackKnight1)})
-blackKnight2.addEventListener('click', function() {displayMoves(blackKnight2)})
-for(let i = 0 ; i < 8 ; i++) {
-    blackPawn[i].addEventListener('click', function() {displayMoves(blackPawn[i])})
+const pieceDetails = {
+  name : null,
+  currentPogition : null,
+  nextPosition : null,
 }
 
-whiteKing.addEventListener('click', function() {displayMoves(whiteKing)})
-whiteQueen.addEventListener('click', function() {displayMoves(whiteQueen)})
-whiteRook1.addEventListener('click', function() {displayMoves(whiteRook1)})
-whiteRook2.addEventListener('click', function() {displayMoves(whiteRook2)})
-whiteBishop1.addEventListener('click', function() {displayMoves(whiteBishop1)})
-whiteBishop2.addEventListener('click', function() {displayMoves(whiteBishop2)})
-whiteKnight1.addEventListener('click', function() {displayMoves(whiteKnight1)})
-whiteKnight2.addEventListener('click', function() {displayMoves(whiteKnight2)})
-for(let i = 0 ; i < 8 ; i++) {
-    whitePawn[i].addEventListener('click', function() {displayMoves(whitePawn[i])})
+function setPieceToMatrix () {
+  for(let i = 0 ; i < 8 ; i++) {
+      chessMatrix.set(`row-6_column-${i}`, blackPawn[i]);
+  }
+
+  chessMatrix.set('row-7_column-0', blackRook1);
+  chessMatrix.set('row-7_column-1', blackKnight1);
+  chessMatrix.set('row-7_column-2', blackBishop1);
+  chessMatrix.set('row-7_column-3', blackQueen);
+  chessMatrix.set('row-7_column-4', blackKing);
+  chessMatrix.set('row-7_column-5', blackBishop2);
+  chessMatrix.set('row-7_column-6', blackKnight2);
+  chessMatrix.set('row-7_column-7', blackRook2);
+
+
+  for(let i = 0 ; i < 8 ; i++) {
+      chessMatrix.set(`row-1_column-${i}`, whitePawn[i]);
+  }
+
+  chessMatrix.set('row-0_column-0', whiteRook1);
+  chessMatrix.set('row-0_column-1', whiteKnight1);
+  chessMatrix.set('row-0_column-2', whiteBishop1);
+  chessMatrix.set('row-0_column-3', whiteQueen);
+  chessMatrix.set('row-0_column-4', whiteKing);
+  chessMatrix.set('row-0_column-5', whiteBishop2);
+  chessMatrix.set('row-0_column-6', whiteKnight2);
+  chessMatrix.set('row-0_column-7', whiteRook2);
+}setPieceToMatrix() 
+
+
+// in piece map the index for a piece is store
+const pieceMap = new Map()
+for( let i of chessMatrix)
+{
+  if(i[1] != null)
+    {
+      pieceMap.set(i[1], i[0])
+    }
 }
 
+console.log(pieceMap)
 
-//displayBoard() function displays the board with all the pieces
+// console.log(chessMatrix)
+
+// Display the board
 function displayBoard()
 { 
-    for(let index of chessMatrix)
+    for(let index of pieceMap)
     {
-       let position = index[0]
-       let piece = index[1]
-        
-       if(piece != null)
+       let position = index[1]
+       let piece = index[0]
+      document.getElementById(position).appendChild(piece)
+    }
+    
+
+}displayBoard();
+
+
+//when a piece is dropped
+for (let i of chessMatrix) {
+  const element = document.getElementById(i[0])
+  element.addEventListener('dragover', (event) => {event.preventDefault()})
+ 
+  element.addEventListener('drop', (event) => { 
+    pieceDetails.nextPosition = i[0]
+    movePiece()
+  });  
+  
+  // when a piece is draged
+  if (i[1] != null)
+    {
+      const piece = i[1]
+      const pogition  = i[0]
+      piece.ondragstart = function () 
         {
-            document.getElementById(position).appendChild(piece)
+          pieceDetails.name = piece
+          pieceDetails.currentPogition = pogition
         }
     }
-
+ 
 }
 
 
-//displayMoves() function displays the possible moves of the piece
-export function displayMoves(piece) {
-    
-    let position = piece.parentElement.id ;
-
-    let r = position.split('_')[0];
-    let row = r.split('-')[1];
-    
-    let c = position.split('_')[1];
-    let column = c.split('-')[1];
-
-    row = Number(row); column = Number(column);
-
-
-   if(piece == blackKing || piece == whiteKing)
-   {
-         displayMovesKing(row , column, piece);
-   }
-   else if(piece == blackQueen || piece == whiteQueen)
-   {
-        displayMovesQueen(row , column);
-   }
-   else if(piece == blackRook1 || piece == blackRook2 || piece == whiteRook1 || piece == whiteRook2)
-   {
-        displayMovesRook(row , column);
-   }
-   else if(piece == blackBishop1 || piece == blackBishop2 || piece == whiteBishop1 || piece == whiteBishop2)
-   {
-        displayMovesBishop(row, column);
-   }
-   else if(piece == blackKnight1 || piece == blackKnight2 || piece == whiteKnight1 || piece == whiteKnight2)
-   {
-        displayMovesKnight(row , column);
-   }
-   else if(piece == blackPawn[0] || piece == blackPawn[1] || piece == blackPawn[2] || piece == blackPawn[3] 
-        || piece == blackPawn[4] || piece == blackPawn[5] || piece == blackPawn[6] || piece == blackPawn[7] 
-        || piece == whitePawn[0] || piece == whitePawn[1] || piece == whitePawn[2] || piece == whitePawn[3] 
-        || piece == whitePawn[4] || piece == whitePawn[5] || piece == whitePawn[6] || piece == whitePawn[7])
-    {
-        displayMovesPawn(row , column);
-    }
+function movePiece() 
+{ 
+  const piece = pieceDetails.name
+  const currentPosition = pieceDetails.currentPogition
+  const nextPosition = pieceDetails.nextPosition
+  
+  pieceMap.set(piece, nextPosition)
+  
+  displayBoard()
 }
 
-
-
-function display(row , column, piece){
-
-    if(row != null && column != null && piece != null)
-    {
-        document.getElementById(`row-${row}_column-${column}`).appendChild(piece)
-
-    }
-    
-    
-}
-displayBoard()

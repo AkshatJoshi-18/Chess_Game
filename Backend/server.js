@@ -1,21 +1,25 @@
-const express = require('express');
-const path = require('path')
+import express from 'express';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
 
+app.use(express.static(join(__dirname, '../Frontend'))); // Serve the static files
 
-const PORT = process.env.PORT || 5050;
-
-
-app.use(express.static(path.join(__dirname, '..', 'Frontend')));
-app.use(express.static(path.join(__dirname, '..', 'Backend')));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'Frontend', 'html', 'index.html'));
+app.get('/login', (req, res) => {
+  res.send("go to /home");
 });
 
+// Define the route for /home
+app.get('/home', (req, res) => {
+  res.sendFile(join(__dirname, '../Frontend/html/index.html'));
+});
 
-app.get
-
+// Start the server
+const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`)
-  });
+  console.log(`Server is running on port ${PORT}`);
+});
