@@ -14,7 +14,7 @@ app.get('/login', (req, res) => {
 });
 
 // Define the route for /home
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(join(__dirname, '../Frontend/html/index.html'));
 });
 

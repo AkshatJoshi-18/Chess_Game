@@ -1,44 +1,52 @@
-// Black pieces
+ // Black pieces
 
 
 const blackKing = document.createElement('img');
 blackKing.src = '../resources/pieces_image/black-king.png';
 blackKing.id = "blackKing"
+blackKing.className = "black"
 
 const blackQueen = document.createElement('img');
 blackQueen.src = '../resources/pieces_image/black-queen.png';
 blackQueen.id = "blackQueen"
+blackQueen.className = "black"
 
 const blackRook1 = document.createElement('img');
 blackRook1.src = '../resources/pieces_image/black-rook.png';
 blackRook1.id = "blackRook1"
+blackRook1.className = "black"
 
 const blackRook2 = document.createElement('img');
 blackRook2.src = '../resources/pieces_image/black-rook.png';
 blackRook2.id = "blackRook2"
+blackRook2.className = "black"
 
 const blackBishop1 = document.createElement('img');
 blackBishop1.src = '../resources/pieces_image/black-bishop.png';
 blackBishop1.id = "blackBishop1"
-
+blackBishop1.className = "black"
 
 const blackBishop2 = document.createElement('img');
 blackBishop2.src = '../resources/pieces_image/black-bishop.png';
 blackBishop2.id = "blackBishop2"
+blackBishop2.className = "black"
 
 const blackKnight1 = document.createElement('img');
 blackKnight1.src = '../resources/pieces_image/black-knight.png';
 blackKnight1.id = "blackKnight1"
+blackKnight1.className = "black"
 
 const blackKnight2 = document.createElement('img');
 blackKnight2.src = '../resources/pieces_image/black-knight.png';
 blackKnight2.id = "blackKnight2"
+blackKnight2.className = "black"
 
 const blackPawn = new Array(8);
 for(let i = 0 ; i < 8 ; i++) {
     blackPawn[i] = document.createElement('img');
     blackPawn[i].src = '../resources/pieces_image/black-pawn.png';
     blackPawn[i].id = `blackPawn${i}`
+    blackPawn[i].className = "black"
 }
 
 
@@ -47,40 +55,49 @@ for(let i = 0 ; i < 8 ; i++) {
 const whiteKing = document.createElement('img');
 whiteKing.src = '../resources/pieces_image/white-king.png';
 whiteKing.id = "whiteKing"
+whiteKing.className = "white"
 
 const whiteQueen = document.createElement('img');
 whiteQueen.src = '../resources/pieces_image/white-queen.png';
 whiteQueen.id = "whiteQueen"
+whiteQueen.className = "white"
 
 const whiteRook1 = document.createElement('img');
 whiteRook1.src = '../resources/pieces_image/white-rook.png';
 whiteRook1.id = "whiteRook1"
+whiteRook1.className = "white"
 
 const whiteRook2 = document.createElement('img');
 whiteRook2.src = '../resources/pieces_image/white-rook.png';
 whiteRook2.id = "whiteRook2"
+whiteRook2.className = "white"
 
 const whiteBishop1 = document.createElement('img');
 whiteBishop1.src = '../resources/pieces_image/white-bishop.png';
 whiteBishop1.id = "whiteBishop1"
+whiteBishop1.className = "white"
 
 const whiteBishop2 = document.createElement('img');
 whiteBishop2.src = '../resources/pieces_image/white-bishop.png';
 whiteBishop2.id = "whiteBishop2"
+whiteBishop2.className = "white"
 
 const whiteKnight1 = document.createElement('img');
 whiteKnight1.src = '../resources/pieces_image/white-knight.png';
 whiteKnight1.id = "whiteKnight1"
+whiteKnight1.className = "white"
 
 const whiteKnight2 = document.createElement('img');
 whiteKnight2.src = '../resources/pieces_image/white-knight.png';
 whiteKnight2.id = "whiteKnight2"
+whiteKnight2.className = "white"
 
 const whitePawn = new Array(8);
 for(let i = 0 ; i < 8 ; i++) {
     whitePawn[i] = document.createElement('img');
     whitePawn[i].src = '../resources/pieces_image/white-pawn.png';
     whitePawn[i].id = `whitePawn${i}`
+    whitePawn[i].className = "white"
 }
 
 
@@ -89,6 +106,7 @@ for(let i = 0 ; i < 8 ; i++) {
 //     whiteQueen, whiteRook1, whiteRook2, whiteBishop1, whiteBishop2, 
 //     whiteKnight1, whiteKnight2, whitePawn ,};
 
+let currentChance = "white"
 
 let chessMatrix = new Map(); // chesess matrix is my initial looking of the board
 
@@ -147,12 +165,14 @@ for( let i of chessMatrix)
 }
 
 console.log(pieceMap)
-
 // console.log(chessMatrix)
 
 // Display the board
 function displayBoard()
 { 
+  let pieceChance = document.getElementById("playerChance")
+  pieceChance.innerText = `${currentChance} to move`
+  console.log(pieceChance)
     for(let index of pieceMap)
     {
        let position = index[1]
@@ -170,6 +190,7 @@ for (let i of chessMatrix) {
   element.addEventListener('dragover', (event) => {event.preventDefault()})
  
   element.addEventListener('drop', (event) => { 
+    event.preventDefault()
     pieceDetails.nextPosition = i[0]
     movePiece()
   });  
@@ -180,10 +201,10 @@ for (let i of chessMatrix) {
       const piece = i[1]
       const pogition  = i[0]
       piece.ondragstart = function () 
-        {
-          pieceDetails.name = piece
-          pieceDetails.currentPogition = pogition
-        }
+          {
+            pieceDetails.name = piece
+            pieceDetails.currentPogition = pogition
+          }
     }
  
 }
@@ -191,11 +212,23 @@ for (let i of chessMatrix) {
 
 function movePiece() 
 { 
+
   const piece = pieceDetails.name
   const currentPosition = pieceDetails.currentPogition
   const nextPosition = pieceDetails.nextPosition
-  
-  pieceMap.set(piece, nextPosition)
+
+  if (piece.className == currentChance) 
+    { 
+      pieceMap.set(piece, nextPosition) 
+      if (currentChance == "white") 
+        {
+          currentChance = "black"
+        }
+      else 
+        {
+          currentChance = "white"
+        }
+    }
   
   displayBoard()
 }

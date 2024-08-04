@@ -2,10 +2,26 @@ body{
     background-color : #151515
 }
 
+#mainDiv{
+    display: flex;
+}
+
+#playerChanceDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+    margin-left: 6%;
+}
+
+
+
 .chessBoard{
     display: grid;
     justify-content: center;
     align-items: center;
+    margin-left: 10%;
 }
 
 .row{
